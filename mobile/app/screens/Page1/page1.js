@@ -10,6 +10,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+
 import {getAllProducts} from '../../services/products';
 
 import Favorite from '../../assets/icons/Favorite.svg';
@@ -60,8 +61,9 @@ const Page1 = ({navigation}) => {
     try {
       setLoading(true);
 
-      const {data} = await getAllProducts(offset, searchArgument);
+      const {data} = await getAllProducts(offset, '');
       setProducts([...products, ...data.Products]);
+      console.log(products);
 
       if (offset < maxLoad - 10) {
         setOffset(offset + 10);
@@ -176,19 +178,11 @@ const Page1 = ({navigation}) => {
             placeholder={'Buscar produto'}
             onChangeText={text => {
               setSearchArgument(text);
-              if (searchArgument.length >= 3) {
-                setOffset(0);
-                setMaxLoad(0);
-                setProducts([]);
-              }
             }}
             value={searchArgument}
             onSubmitEditing={() => {
               if (searchArgument.length >= 3) {
-                setOffset(0);
-                setMaxLoad(0);
-                setProducts([]);
-                getProducts();
+                navigation.navigate('Page2', {argument: searchArgument});
                 setSearchArgument('');
               }
             }}
@@ -196,10 +190,7 @@ const Page1 = ({navigation}) => {
           <TouchableOpacity
             onPress={() => {
               if (searchArgument.length >= 3) {
-                setOffset(0);
-                setMaxLoad(0);
-                setProducts([]);
-                getProducts();
+                navigation.navigate('Page2', {argument: searchArgument});
                 setSearchArgument('');
               }
             }}>
