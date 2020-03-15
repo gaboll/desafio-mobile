@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (offset, Query) => {
   const baseUrl = 'https://desafio.mobfiq.com.br/Search/Criteria';
   const request = {
-    Query: '',
-    Offset: 0,
+    Query,
+    Offset: offset,
     Size: 10,
   };
   const requestOptions = {ContentType: 'application/json'};
