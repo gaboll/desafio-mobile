@@ -1,10 +1,13 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Page1, Page2} from '../screens';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
+import {Home, SearchPage, Categories} from '../screens';
 
 const Stack = createStackNavigator();
+
+const Drawer = createDrawerNavigator();
 
 const AppNavigator = () => {
   return (
@@ -12,12 +15,17 @@ const AppNavigator = () => {
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
-          component={Page1}
+          component={Home}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Page2"
-          component={Page2}
+          name="SearchPage"
+          component={SearchPage}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Categories"
+          component={Categories}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
