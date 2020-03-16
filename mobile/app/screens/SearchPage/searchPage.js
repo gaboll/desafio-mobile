@@ -12,9 +12,6 @@ import {
 
 import {getAllProducts} from '../../services/products';
 
-import MenuButton from '../../assets/icons/Menu.svg';
-import Search from '../../assets/icons/Search.svg';
-
 import {ProductCard, Header} from '../../components';
 
 const searchPage = ({route, navigation}) => {
@@ -101,6 +98,8 @@ const searchPage = ({route, navigation}) => {
   return (
     <>
       <Header
+        leftButtonType={'GoBackButton'}
+        onPressLeftButton={() => navigation.goBack()}
         onChangeTextInput={text => {
           setSearchArgument(text);
           if (searchArgument.length >= 3) {

@@ -5,6 +5,8 @@ import {
   FlatList,
   Alert,
   ActivityIndicator,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 
 import {getAllProducts} from '../../services/products';
@@ -108,6 +110,7 @@ const Home = ({navigation}) => {
   return (
     <>
       <Header
+        leftButtonType={'MenuButton'}
         onChangeTextInput={text => {
           setSearchArgument(text);
         }}
@@ -125,16 +128,17 @@ const Home = ({navigation}) => {
           }
         }}
       />
+      <View style={styles.categoriesField}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Categories', {categoryList});
+          }}>
+          <Text style={styles.categoriesText}>Categorias</Text>
+        </TouchableOpacity>
+      </View>
       <FlatList
         data={products}
-        renderItem={item => (
-          <ProductCard
-            product={item}
-            onPressFavoriteButton={() => {
-              navigation.navigate('Categories', {categoryList});
-            }}
-          />
-        )}
+        renderItem={item => <ProductCard product={item} />}
         keyExtractor={(item, index) => index}
         numColumns={2}
         contentContainerStyle={styles.container}
@@ -151,6 +155,16 @@ const Home = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F0EFF4',
+  },
+  categoriesField: {
+    height: 40,
+    backgroundColor: 'red',
+    justifyContent: 'center',
+    padding: 10,
+  },
+  categoriesText: {
+    fontSize: 16,
+    color: 'white',
   },
 });
 

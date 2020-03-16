@@ -3,13 +3,19 @@ import {StyleSheet, View, TouchableOpacity, TextInput} from 'react-native';
 
 import MenuButton from '../../assets/icons/Menu.svg';
 import Search from '../../assets/icons/Search.svg';
+import ArrowBackWhite from '../../assets/icons/ArrowBack-white.svg';
 
 const ProductCard = props => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.menuButtonContainer}>
-        <TouchableOpacity onPress={props.onPressMenuButton || (() => {})}>
-          <MenuButton width={30} height={30} />
+        <TouchableOpacity onPress={props.onPressLeftButton || (() => {})}>
+          {props.leftButtonType === 'MenuButton' && (
+            <MenuButton width={30} height={30} />
+          )}
+          {props.leftButtonType === 'GoBackButton' && (
+            <ArrowBackWhite width={20} height={20} fill="white" />
+          )}
         </TouchableOpacity>
       </View>
       <View style={styles.searchField}>
